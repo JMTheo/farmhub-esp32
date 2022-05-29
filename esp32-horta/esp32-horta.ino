@@ -15,7 +15,7 @@ const int LED = 2;      // D22 (ESP32)
 const int SOLO = A3; // Sensor de umidade de solo
 
 // Criando json para envio de informação
-DynamicJsonDocument doc(256)
+DynamicJsonDocument doc(256);
 
 void messageHandler(const String &msg);
 
@@ -46,7 +46,7 @@ void setup()
   // client.enableHTTPWebUpdater(); // Enable the web updater. User and password default to values of MQTTUsername and MQTTPassword. These can be overridded with enableHTTPWebUpdater("user", "password").
   client.enableOTA();               // Enable OTA (Over The Air) updates. Password defaults to MQTTPassword. Port is the default OTA port. Can be overridden with enableOTA("password", port).
   client.enableLastWillMessage("ESP32/lastwill", "I am going offline");
-  delay(1000)
+  delay(1000);
 }
 
 void onConnectionEstablished()
@@ -58,8 +58,7 @@ void onConnectionEstablished()
 
 void messageHandler(const String &msg)
 {
-  char json[] = msg;
-  DeserializationError error = deserializeJson(doc, json);
+  DeserializationError error = deserializeJson(doc, msg);
   if (doc["action"] == "lj")
   {
     digitalWrite(LED, HIGH);
@@ -74,7 +73,7 @@ void messageHandler(const String &msg)
   }
   else if (doc["action"] == "sendData")
   {
-    sendData()
+    sendData();
   }
 }
 
