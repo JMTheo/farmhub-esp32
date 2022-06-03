@@ -1,4 +1,4 @@
-# Horta Arduino
+# FarmHub Arduino
 
 ## Instalação
 
