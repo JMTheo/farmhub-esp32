@@ -12,7 +12,7 @@ const int VALVULA = 13; // D6(ESP82) D13(ESP32) Válvula solenoide no RELE
 const int LED = 2;      // D22 (ESP32)
 
 // Analógico
-const int SOLO = A3; // Sensor de umidade de solo
+const int SOLO = 36; // Sensor de umidade de solo
 
 // Criando json para envio de informação
 DynamicJsonDocument doc(256);
@@ -22,11 +22,11 @@ void messageHandler(const String &msg);
 EspMQTTClient client(
     "Jailson",         // SSID
     "@theo121299jail", // PASSWORD WIFI
-    "192.168.3.11",    // MQTT Broker server ip
+    "143.244.165.124",    // MQTT Broker server ip
     "",                // MQTTUsername Can be omitted if not needed
     "",                // MQTTPassword Can be omitted if not needed
     "ESP32",           // Client name that uniquely identify your device
-    3000               // The MQTT port
+    3030               // The MQTT port
 );
 
 void setup()
@@ -67,13 +67,15 @@ void messageHandler(const String &msg)
   {
     digitalWrite(LED, LOW);
   }
-  else if (doc["action"] == "releaseWater")
+  else if (doc["action"] == "activeWater")
   {
     releaseWater(doc["ms"]);
   }
-  else if (doc["action"] == "sendData")
+  else if (doc["action"] == "getAllSensor")
   {
     sendData();
+  } else {
+    client.publish("iot/farm", "Erro");
   }
 }
 
