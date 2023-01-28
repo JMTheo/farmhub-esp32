@@ -21,7 +21,7 @@ void messageHandler(const String &msg);
 
 EspMQTTClient client(
     "Jailson",         // SSID
-    "@theo121299jail", // PASSWORD WIFI
+    "", // PASSWORD WIFI
     "143.244.165.124",    // MQTT Broker server ip
     "",                // MQTTUsername Can be omitted if not needed
     "",                // MQTTPassword Can be omitted if not needed
